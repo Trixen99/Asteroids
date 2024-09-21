@@ -34,10 +34,18 @@ def main():
         pygame.Surface.fill(screen, "black")
         for updates in updatable:
             updates.update(dt)
+
         for asteroid in Asteroids_Group:
             if player1.collision_detection(asteroid) == True:
                 print("Game over!")
                 exit()
+
+        for asteroid in Asteroids_Group:
+            for shot in Shots_Group:
+                if shot.collision_detection(asteroid):
+                    asteroid.kill()
+                    shot.kill()
+                    
         for draws in drawable:
             draws.draw(screen)
         pygame.display.flip()
